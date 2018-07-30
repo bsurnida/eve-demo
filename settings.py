@@ -24,9 +24,9 @@ import os
 # Heroku, sensible DB connection settings are stored in environment variables.
 MONGO_HOST = os.environ.get('MONGO_HOST', 'localhost')
 MONGO_PORT = os.environ.get('MONGO_PORT', 27017)
-MONGO_USERNAME = os.environ.get('MONGO_USERNAME', 'user')
-MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD', 'user')
-MONGO_DBNAME = os.environ.get('MONGO_DBNAME', 'evedemo')
+#MONGO_USERNAME = os.environ.get('MONGO_USERNAME', 'user')
+#MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD', 'user')
+MONGO_DBNAME = os.environ.get('MONGO_DBNAME', 'demodb')
 
 
 # Enable reads (GET), inserts (POST) and DELETE for resources/collections
@@ -128,9 +128,52 @@ works = {
     }
 }
 
+contacts = {
+    # 'title' tag used in item links.
+    'item_title': 'contact',
+
+    # by default the standard item entry point is defined as
+    # '/people/<ObjectId>/'. We leave it untouched, and we also enable an
+    # additional read-only entry point. This way consumers can also perform GET
+    # requests at '/people/<lastname>/'.
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'name'
+    },
+
+    # Schema definition, based on Cerberus grammar. Check the Cerberus project
+    # (https://github.com/pyeve/cerberus) for details.
+    'schema': {
+        'name': {
+            'type': 'string',
+        },
+        'position': {
+            'type': 'string',
+         },
+        'office': {
+            'type': 'string',
+        },
+		'ext': {
+            'type': 'string',
+        },
+		'startDate': {
+            'type': 'string',
+        }, 
+		'salary': {
+            'type': 'double',
+        }, 		
+    }
+}
+
 # The DOMAIN dict explains which resources will be available and how they will
 # be accessible to the API consumer.
 DOMAIN = {
     'people': people,
     'works': works,
+	'contacts': contacts,
 }
+
+
+X_DOMAINS = '*'
+
+# EOF

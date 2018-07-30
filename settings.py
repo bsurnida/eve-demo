@@ -22,11 +22,15 @@ import os
 
 # We want to seamlessy run our API both locally and on Heroku. If running on
 # Heroku, sensible DB connection settings are stored in environment variables.
+#<<<<<<< HEAD
 MONGO_HOST = os.environ.get('MONGO_HOST', 'localhost')
 MONGO_PORT = os.environ.get('MONGO_PORT', 27017)
 #MONGO_USERNAME = os.environ.get('MONGO_USERNAME', 'user')
 #MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD', 'user')
 MONGO_DBNAME = os.environ.get('MONGO_DBNAME', 'demodb')
+#=======
+#MONGO_URI = os.environ.get('MONGODB_URI', 'mongodb://user:user@localhost:27017/evedemo')
+#>>>>>>> d729968646568c8f168ae22251a7ca9cf0b932eb
 
 
 # Enable reads (GET), inserts (POST) and DELETE for resources/collections
